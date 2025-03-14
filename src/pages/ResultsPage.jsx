@@ -185,7 +185,7 @@ const ResultsPage = () => {
                           </p>
                           {!isCorrect && (
                             <p className="text-gray-600 mt-1">
-                              Correct answer:{" "}
+                              To'gri javob:{" "}
                               <span className="text-green-600 font-medium">
                                 {question.options[question.correctAnswer]}
                               </span>
