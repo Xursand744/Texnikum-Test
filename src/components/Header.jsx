@@ -54,8 +54,12 @@ const Header = () => {
 
           {!isTestActive && (
             <nav className="flex gap-6 items-center">
-              <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors">
-                Home
+             
+              <Link to="/computer-engineering" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Kompyuter injiniringi
+              </Link>
+              <Link to="/interview-questions" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Suhbat savollari
               </Link>
               <button
                 onClick={() => {
@@ -88,7 +92,7 @@ const Header = () => {
             </div>
             <div className="p-6">
               <div className="mb-6">
-                <p className="mb-4">Administrator paneliga kirish uchun administrator hisob ma’lumotlarini kiriting:</p>
+                <p className="mb-4">Administrator paneliga kirish uchun administrator hisob ma'lumotlarini kiriting:</p>
 
                 <div className="space-y-4">
                   <div>
@@ -126,7 +130,9 @@ const Header = () => {
                       }}
                       autoFocus
                     />
-                    {loginError && <p className="mt-1 text-sm text-red-600">Noto'g'ri parol. Iltimos, qayta urinib koʻring.</p>}
+                    {loginError && (
+                      <p className="mt-1 text-sm text-red-600">Noto'g'ri parol. Iltimos, qayta urinib koʻring.</p>
+                    )}
                   </div>
                 </div>
 
