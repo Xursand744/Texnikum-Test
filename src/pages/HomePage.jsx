@@ -1,6 +1,6 @@
 "use client"
 
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import Header from "../components/Header"
 import { useTest } from "../contexts/TestContext"
 import banner from "../../public/banner.webp"
@@ -8,9 +8,10 @@ import "../index.css"
 
 const HomePage = () => {
   const { startTest } = useTest()
+  const navigate = useNavigate()
 
   const handleStartTest = () => {
-    startTest()
+    navigate("/test-categories")
   }
 
   return (
@@ -40,7 +41,7 @@ const HomePage = () => {
 
               <div className="flex flex-wrap gap-4 justify-center mb-12">
                 <Link
-                  to="/test"
+                  to="/test-categories"
                   className="foo bg-gradient-to-r text-[50px] from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white font-semibold py-4 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-cyan-200/50"
                   onClick={handleStartTest}
                 >
@@ -110,92 +111,7 @@ const HomePage = () => {
         {/* Rest of the content */}
         <div className="container mx-auto px-4">
           {/* Test Structure Section */}
-          <div className="mt-16 bg-white rounded-xl shadow-sm border border-blue-100 p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">2023-2024-o'quv yili Test Strukturasi</h2>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-blue-700">
-                  Barcha test topshiruvchilar uchun majburiy fanlar:
-                </h3>
-
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="font-semibold text-blue-600">1</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Ona tili (o'zbek, rus yoki qoraqalpoq tili)</p>
-                      <p className="text-gray-600 text-sm">10 ta savol. Har biri uchun 1.1 balldan.</p>
-                      <p className="text-blue-600 font-medium">Maksimal ball – 11 ball</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="font-semibold text-blue-600">2</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">Matematika</p>
-                      <p className="text-gray-600 text-sm">10 ta savol. Har biri uchun 1.1 balldan.</p>
-                      <p className="text-blue-600 font-medium">Maksimal ball – 11 ball</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="font-semibold text-blue-600">3</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">O'zbekiston tarixi</p>
-                      <p className="text-gray-600 text-sm">10 ta savol. Har biri uchun 1.1 balldan.</p>
-                      <p className="text-blue-600 font-medium">Maksimal ball – 11 ball</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-blue-50 p-3 rounded-lg mt-4">
-                  <p className="font-medium text-blue-800">Jami to'plash mumkin bo'lgan ball – 33 ball</p>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-blue-700">Kasb va mutaxassisligiga mos fanlar:</h3>
-
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="font-semibold text-cyan-600">1</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">1-fan</p>
-                      <p className="text-gray-600 text-sm">30 ta savol. Har biri uchun 3.1 balldan.</p>
-                      <p className="text-cyan-600 font-medium">Maksimal ball – 93 ball</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="font-semibold text-cyan-600">2</span>
-                    </div>
-                    <div>
-                      <p className="font-medium">2-fan</p>
-                      <p className="text-gray-600 text-sm">30 ta savol. Har biri uchun 2.1 balldan.</p>
-                      <p className="text-cyan-600 font-medium">Maksimal ball – 63 ball</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-cyan-50 p-3 rounded-lg mt-4">
-                  <p className="font-medium text-cyan-800">Jami to'plash mumkin bo'lgan ball – 156 ball</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 bg-gradient-to-r from-blue-600 to-cyan-500 p-4 rounded-lg text-center">
-              <p className="text-white font-bold text-lg">5 ta fan bo'yicha maksimal ball 189</p>
-            </div>
-          </div>
+        
 
           {/* Study Materials Section */}
           <div className="mt-16 mb-16">
@@ -283,7 +199,7 @@ const HomePage = () => {
               </Link>
 
               <Link
-                to="/test"
+                to="/test-categories"
                 onClick={handleStartTest}
                 className="bg-white rounded-xl shadow-sm border border-blue-100 p-6 hover:shadow-md transition-shadow group"
               >
@@ -356,4 +272,3 @@ const HomePage = () => {
 }
 
 export default HomePage
-

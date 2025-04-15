@@ -3,11 +3,14 @@
 import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router"
 import { useAuth } from "../App"
+import { useUser } from "../contexts/UserContext"
 
 const Header = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const { login } = useAuth()
+  const { user, logout } = useUser()
+
   const isTestActive = location.pathname === "/test"
   const [password, setPassword] = useState("")
   const [showLoginModal, setShowLoginModal] = useState(false)
@@ -54,13 +57,46 @@ const Header = () => {
 
           {!isTestActive && (
             <nav className="flex gap-6 items-center">
-             
               <Link to="/computer-engineering" className="text-gray-700 hover:text-blue-600 transition-colors">
                 Kompyuter injiniringi
               </Link>
               <Link to="/interview-questions" className="text-gray-700 hover:text-blue-600 transition-colors">
                 Suhbat savollari
               </Link>
+
+              {user ? (
+                <div className="flex items-center gap-4">
+                  <Link to="/test-categories" className="text-gray-700 hover:text-blue-600 transition-colors">
+                    Test topshirish
+                  </Link>
+                  <Link
+                    to="/profile"
+                    className="flex items-center gap-2 bg-blue-50 px-3 py-1.5 rounded-full text-blue-700 hover:bg-blue-100 transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fillRule="evenodd"
+                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>{user.fullName.split(" ")[0]}</span>
+                  </Link>
+                </div>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <Link to="/login" className="text-gray-700 hover:text-blue-600 transition-colors">
+                    Kirish
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Ro'yxatdan o'tish
+                  </Link>
+                </div>
+              )}
+
               <button
                 onClick={() => {
                   setPassword("")
@@ -167,4 +203,3 @@ const Header = () => {
 }
 
 export default Header
-

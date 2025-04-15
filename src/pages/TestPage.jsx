@@ -15,15 +15,23 @@ const TestPage = () => {
     previousQuestion,
     testCompleted,
     testStarted,
+    currentCategory,
+    getCurrentQuestions,
   } = useTest()
 
   const [selectedOption, setSelectedOption] = useState(null)
-  const [timeLeft, setTimeLeft] = useState(30 * 60)
+  const [timeLeft, setTimeLeft] = useState(30 * 60) // 30 minutes
+  const [currentQuestions, setCurrentQuestions] = useState([])
+
+  // Get current questions based on category
+  useEffect(() => {
+    setCurrentQuestions(getCurrentQuestions())
+  }, [currentCategory, getCurrentQuestions])
 
   // Redirect if test not started
   useEffect(() => {
     if (!testStarted) {
-      navigate("/")
+      navigate("/test-categories")
     }
   }, [testStarted, navigate])
 
@@ -78,7 +86,39 @@ const TestPage = () => {
     previousQuestion()
   }
 
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100
+  const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100
+
+  // Get category name for display
+  const getCategoryName = () => {
+    if (!currentCategory) return "To'liq test"
+
+    switch (currentCategory) {
+      case "nativeLanguage":
+        return "Ona tili"
+      case "mathematics":
+        return "Matematika"
+      case "history":
+        return "O'zbekiston tarixi"
+      default:
+        return "Test"
+    }
+  }
+
+  // Get category color
+  const getCategoryColor = () => {
+    if (!currentCategory) return "bg-gradient-to-r from-blue-600 to-cyan-500"
+
+    switch (currentCategory) {
+      case "nativeLanguage":
+        return "bg-green-600"
+      case "mathematics":
+        return "bg-blue-600"
+      case "history":
+        return "bg-purple-600"
+      default:
+        return "bg-gradient-to-r from-blue-600 to-cyan-500"
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col">
@@ -86,10 +126,10 @@ const TestPage = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <div className="bg-gradient-to-r from-blue-600 to-cyan-500 w-10 h-10 rounded-lg flex items-center justify-center">
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center text-white ${getCategoryColor()}`}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-white"
+                  className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -102,9 +142,7 @@ const TestPage = () => {
                   />
                 </svg>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-                Texnikum Test
-              </span>
+              <span className="text-xl font-bold">{getCategoryName()}</span>
             </div>
 
             <div className="flex items-center gap-4">
@@ -127,7 +165,7 @@ const TestPage = () => {
               </div>
 
               <div className="text-sm font-medium">
-                Question {currentQuestionIndex + 1} of {questions.length}
+                Savol {currentQuestionIndex + 1} / {currentQuestions.length}
               </div>
             </div>
           </div>
@@ -195,14 +233,14 @@ const TestPage = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              Previous
+              Oldingi
             </button>
 
             <button
               onClick={handleNext}
               className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2"
             >
-              {currentQuestionIndex === questions.length - 1 ? "Finish Test" : "Next"}
+              {currentQuestionIndex === currentQuestions.length - 1 ? "Testni yakunlash" : "Keyingi"}
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path
                   fillRule="evenodd"
@@ -219,4 +257,3 @@ const TestPage = () => {
 }
 
 export default TestPage
-
